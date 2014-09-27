@@ -1,0 +1,12 @@
+rabbitmq:
+	producers:
+		emails:
+			exchange: {name: 'emails', type: direct}
+			contentType: application/vnd.php.serialized
+
+	consumers:
+		emails:
+			queue: {name: emails}
+			qos: {prefetchCount: 5}
+			idleTimeout: 60
+			callback: @App\EmailsQueue::process
